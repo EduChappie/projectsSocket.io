@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js" integrity="sha512-rwu37NnL8piEGiFhe2c5j4GahN+gFsIn9k/0hkRY44iz0pc81tBNaUN56qF8X4fy+5pgAAgYi2C9FXdetne5sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <input type="text" name="user" id="user" placeholder="nome do usúario">
+    <div id="mensagens"></div>
+
+    <div id="inputBox">
+        <input type="text" name="msg" id="msg" placeholder="Digite algo">
+        <button onclick="enviar()">Go</button>
+    </div>
+
+    <script>
+        const socket = io('http://192.168.10.108:4041');
+
+        //Função de criar a caixa da mensagem
+        function createBox(msg) {
+            const screen = document.querySelector('#mensagens');
+            screen.innerHTML += `<div><strong>${msg.autor}</strong>: ${msg.texto}</div>`
+        } 
+
+        // Ouvindo chamada do servidor, para restaurar mensagens salvas
+        socket.on("restaurar", db => {
+            for (db of db) {
+                createBox(db)
+            }
+        })
+
+        socket.on("recebimento", msg => {
+            createBox(msg);
+        })
+
+        // Função de mandar msg escrita
+        function enviar() {
+            const msgObject = {
+                autor: document.getElementById("user").value,
+                texto: document.getElementById("msg").value
+            }
+            createBox(msgObject)
+
+            socket.emit("newMessage", msgObject);
+        }
+
+    </script>
+
+</body>
+</html>
