@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.box {
+    width: 502px;
+    height: 502px;
+    border: 1px solid red;
+    margin-left: auto;
+    margin-right: auto;
+}
+canvas {
+    border: 1px solid black;
+}
