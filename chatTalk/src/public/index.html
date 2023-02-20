@@ -10,23 +10,20 @@
 </head>
 <body>
     
-    <div class="cotn">
-        <header>
-            <h1>ChatTalk🎙️</h1>
-            <hr>
-        </header>
-        <article class="msgArea">
-            <div id="mensagens">
-            </div>
-        </article>
-        <article class="inputArea">
-            <section>
-                <input type="text" class="inpu" id="user" placeholder="User">
-                <textarea id="msg" class="inpu" cols="50" rows="10" placeholder="mensagem..."></textarea>
-                <button class="btn" onclick="enviar()">Enviar</button>
-            </section>
-        </article>
-    </div>
+    <header>
+        <h1>ChatTalk🎙️</h1>
+        <label>Nome do usúario:</label>
+        <input type="text" id="user" placeholder="nome...">
+        <hr>
+    </header>
+    <section>
+        <div id="mensagens"></div>
+    </section>
+    <form>
+        <label">Mensagem</label>
+        <input type="text" id="msg" placeholder="mensagem...">
+        <button onclick="enviar(event)">Enviar</button>
+    </form>
 
     <script>
         const socket = io('http://192.168.10.108:4041');
@@ -49,7 +46,9 @@
         })
 
         // Função de mandar msg escrita
-        function enviar() {
+        function enviar(event) {
+            event.preventDefault();
+
             const msgObject = {
                 autor: document.getElementById("user").value,
                 texto: document.getElementById("msg").value
