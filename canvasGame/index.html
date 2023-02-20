@@ -13,27 +13,6 @@
         <p class="coords">x: 0 - y: 0</p>
     </div>
 
-    <script>
-
-        function draw() {
-            const canvas = document.getElementsByTagName("canvas")[0];
-            const cvs = canvas.getContext("2d");
-
-
-            function showMe(event) {
-                var coo = document.getElementsByClassName("coords")[0];
-                coo.innerHTML = `x: ${event.screenX} - y: ${event.screenY}`
-            }
-
-            function createPlayer() {
-                cvs.fillStyle = "rgb(10, 10, 10)";
-                cvs.strokeRect(20, 20, 50, 50);
-            }
-            createPlayer()
-
-            canvas.addEventListener("mousemove", (event) => showMe(event));
-        }
-
-    </script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
