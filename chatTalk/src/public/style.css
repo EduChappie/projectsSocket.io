@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #3f1e6d;
+}
+.cotn {
+    width: 48%;
+    color: white;
+    padding: 10px;
+    border: 1px dashed white;
+    border-radius: 5px;
+    margin: 5% auto 0 auto;
+    background-color: #512e7f;
+}
+article.msgArea {
+    height: 45%;
+    background-color: whitesmoke;
+    color: black;
+    border: 1px solid #3f1e6d;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 10px;
+}
+article.inputArea {
+    width: 45%;
+    padding: 5px;
+    margin-left: 35px;
+}
+#msg {
+    margin-top: 10px;
+}
+.btn {
+    width: 60px;
+    height: 28px;
+}
+.inpu {
+    padding: 5px;
+}
