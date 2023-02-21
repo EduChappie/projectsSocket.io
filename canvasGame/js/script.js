@@ -9,6 +9,10 @@ const apple = {
     width: 10,
     height: 10
 }
+function newApple() {
+    apple.coors_x = Math.random() * 500;
+    apple.coors_y = Math.random() * 500;
+}
 
 const players = [
     {
@@ -18,27 +22,29 @@ const players = [
         coors_y: 10,
         width: 50,
         height: 50,
-        vlc: 5
+        vlc: 5,
+        achviments: 0
     }
 ]
 
-
+// Detecção da tecla sendo pressionadas
 document.body.addEventListener("keydown", ({ key }) => {
     const me = players.find(Element => Element.type == "player");
     if (key == "ArrowRight") {
-        me.coors_x += 5 * me.vlc;
+        me.coors_x += 2.5 * me.vlc;
     }
     if (key == "ArrowLeft") {
-        me.coors_x -= 5 * me.vlc;
+        me.coors_x -= 2.5 * me.vlc;
     }
     if (key == "ArrowUp") {
-        me.coors_y -= 5 * me.vlc;
+        me.coors_y -= 2.5 * me.vlc;
     }
     if (key == "ArrowDown") {
-        me.coors_y += 5 * me.vlc;
+        me.coors_y += 2.5 * me.vlc;
     }
 });
 
+// Colisão para fora do mapa
 function collision(ent) {
     if (ent.coors_x+ent.width > 500) { ent.coors_x = 499-ent.width }
     if (ent.coors_x < 0) { ent.coors_x = 0 }
@@ -46,6 +52,28 @@ function collision(ent) {
     if (ent.coors_y < 0) { ent.coors_y = 0 }
 }
 
+function getTheApple() {
+    players.forEach(element => {
+        if(apple.coors_x >= element.coors_x && apple.coors_x <= element.coors_x+element.width) {
+            if (apple.coors_y >= element.coors_y && apple.coors_y <= element.coors_y+element.height) {
+                // positivo, achou a apple
+                newApple()
+                const me = players.find(ent => element.type == "player")
+                me.achviments += 1
+                rank();
+            }
+        }
+    });
+}
+
+function rank() {
+    const screen = document.querySelector(".rank");
+    for (let i=0; i < players.length; i++) {
+        screen.innerHTML = `<p>${i+1}. ${players[i].type} - ${players[i].achviments}</p>`
+    }
+}
+
+// Desenhando personagens e objetos
 function draw() {
     players.forEach(ent => {
         ctx.fillStyle = ent.color;
@@ -54,7 +82,9 @@ function draw() {
     });
     ctx.fillStyle = apple.color;
     ctx.fillRect(apple.coors_x, apple.coors_y, apple.width, apple.height);
+    
     collision(apple);
+    getTheApple();
 }
 
 function game(timestamp) {
