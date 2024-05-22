@@ -1,11 +1,11 @@
-#Chat Real Time ::tw-1f680: 
-um chat de conversa em tempo real :tw-1f600:
+# Chat Real Time 🚀
+Um chat de conversa em tempo real 😄
 
-#Utilizando tecnologias como:
+# Utilizando tecnologias como:
 - EJS -> para o front-end
 - Express -> para criação do servidor
 - Socket.io -> para a troca de informações em tempo real
 E o básico:
- - html
- - css
- - javascript
+  - html
+  - css
+  - javascript
